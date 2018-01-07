@@ -23,7 +23,7 @@ module RmodbusCli
         end
       end
 
-      puts opts.to_hash
+      # puts opts.to_hash
       modbus = RmodbusCli::Modbus.new(opts.to_hash)
       modbus.read_value(opts[:address], opts[:count])
     end
