@@ -6,7 +6,10 @@ module RmodbusCli
       opts = Slop.parse do |o|
         o.string '-t', '--tty', 'Serial (USB) Port', default: '/dev/ttyUSB0'
         o.integer '-b', 'baudrate', 'Serial port baudrate', default: 115200
-        o.string '-d', '--dictionary_file', 'Path to json file that contains Grin Modbus Dictionary', default: "BOD.json"
+        o.string '-d',
+                 '--dictionary_file',
+                 'Path to json file that contains Grin Modbus Dictionary',
+                 default: File.expand_path('../../../BODm.json', __FILE__)
         o.integer '-s', 'slave_id', "Modbus slave ID", default: 1
         o.integer '-a', 'address', "Slave Register Starting Address", default: 312
         o.integer '-c', 'count', "Number of Slave Register Addresses", default: 1

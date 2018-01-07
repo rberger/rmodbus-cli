@@ -52,7 +52,7 @@ module RmodbusCli
     def read_value(start_address, count)
       puts("Reading from #{dict[start_address][:name]}")
       cl = ::ModBus::RTUClient.new(tty, baudrate)
-      cl.with_slave(opts[:slave_id]) do |slave|
+      cl.with_slave(slave_id) do |slave|
         puts slave.read_holding_registers(start_address, count)
       end
     end
