@@ -38,10 +38,15 @@ module RmodbusCli
     # symbols for other keys
     # @params [Hash<String, Hash>] original_dict The Dictionary as it came from JSON
     def clean_dict(original_dict)
-      Hash[original_dict.map do |address, hash|
-             [address.to_i, Hash[hash.map { |k,v| [k.to_sym, v] }]]
-           end
-          ]
+      original_dict.each_with_object({}) do |(k, v), memo|
+        memo[k.to_i] = clean_node(v)
+      end
+    end
+
+    def clean_node(node)
+      node.each_with_object({}) do |(k, v), memo|
+        memo[k.to_sym] = v
+      end
     end
 
     def read_value(start_address, count)
